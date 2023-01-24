@@ -1,6 +1,10 @@
 import random
 
-print("Welcome to Tic Tac Toe")
+### This game was made a few years ago in a high school class, 
+### need to clean-up repetitive code and apply minimiMax algo
+
+
+print("Welcome to Tic Tac Toe, Made for Tuq")
 print("----------------------")
 
 possibleNumbers = [1,2,3,4,5,6,7,8,9]
@@ -37,9 +41,8 @@ def modifyArray(num, turn):
   elif(num == 8):
     gameBoard[2][2] = turn
 
-### Define function to check for a winner
-def checkForWinner(gameBoard):
-  ### X axis
+
+def Winner(gameBoard):
   if(gameBoard[0][0] == 'X' and gameBoard[0][1] == 'X' and gameBoard[0][2] == 'X'):
     print("X has won!")
     return "X"
@@ -94,11 +97,10 @@ def checkForWinner(gameBoard):
     return "N"
 
 leaveLoop = False
-turnCounter = 0
+turnCount = 0
 
 while(leaveLoop == False):
-  ### It's the player turn
-  if(turnCounter % 2 == 0):
+  if(turnCount % 2 == 0):
     printGameBoard()
     numberPicked = int(input("\nChoose a number [1-9]: "))
     if(numberPicked >= 1 or numberPicked <= 9):
@@ -106,8 +108,7 @@ while(leaveLoop == False):
       possibleNumbers.remove(numberPicked)
     else:
       print("Invalid input. Please try again.")
-    turnCounter += 1
-  ### It's the computer's turn
+    turnCount += 1
   else:
     while(True):
       cpuChoice = random.choice(possibleNumbers)
@@ -115,10 +116,10 @@ while(leaveLoop == False):
       if(cpuChoice in possibleNumbers):
         modifyArray(cpuChoice, 'O')
         possibleNumbers.remove(cpuChoice)
-        turnCounter += 1
+        turnCount += 1
         break
   
-  winner = checkForWinner(gameBoard)
+  winner = Winner(gameBoard)
   if(winner != "N"):
     print("\nGame over! Thank you for playing :)")
     break
