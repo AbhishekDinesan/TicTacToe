@@ -7,7 +7,7 @@ import random
 print("Welcome to Tic Tac Toe, Made for Tuq")
 print("----------------------")
 
-possibleNumbers = [1,2,3,4,5,6,7,8,9]
+placements = [1,2,3,4,5,6,7,8,9]
 gameBoard = [[1,2,3], [4,5,6], [7,8,9]]
 rows = 3
 cols = 3
@@ -18,7 +18,7 @@ def printGameBoard():
     print("|", end="")
     for y in range(cols):
       print("", gameBoard[x][y], end=" |")
-  print("\n+---+---+---+")8
+  print("\n+---+---+---+")
 
 def modifyArray(num, turn):
   num -= 1
@@ -41,6 +41,7 @@ def modifyArray(num, turn):
   elif(num == 8):
     gameBoard[2][2] = turn
 
+###horrible code
 
 def Winner(gameBoard):
   if(gameBoard[0][0] == 'X' and gameBoard[0][1] == 'X' and gameBoard[0][2] == 'X'):
@@ -102,24 +103,24 @@ turnCount = 0
 while(leaveLoop == False):
   if(turnCount % 2 == 0):
     printGameBoard()
-    numberPicked = int(input("\nChoose a number [1-9]: "))
+    numberPicked = int(input("\nTo begin, Choose a number [1-9] to place your block: "))
     if(numberPicked >= 1 or numberPicked <= 9):
       modifyArray(numberPicked, 'X')
-      possibleNumbers.remove(numberPicked)
+      placements.remove(numberPicked)
     else:
       print("Invalid input. Please try again.")
     turnCount += 1
   else:
     while(True):
-      cpuChoice = random.choice(possibleNumbers)
+      cpuChoice = random.choice(placements)
       print("\nCpu choice: ", cpuChoice)
-      if(cpuChoice in possibleNumbers):
+      if(cpuChoice in placements):
         modifyArray(cpuChoice, 'O')
-        possibleNumbers.remove(cpuChoice)
+        placements.remove(cpuChoice)
         turnCount += 1
         break
   
   winner = Winner(gameBoard)
   if(winner != "N"):
-    print("\nGame over! Thank you for playing :)")
+    print("\nGame over! Can I get an interview?")
     break
